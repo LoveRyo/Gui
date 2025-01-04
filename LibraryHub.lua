@@ -564,28 +564,32 @@ function sitinklib:Start(GuiConfig)
     end)
 
     --//Open/Close Gui
-    local ToggleGui = Instance.new("ScreenGui")
-    local ToggleButton = Instance.new("ImageButton")
-    local ToggleCorner = Instance.new("UICorner")
+    local ScreenGui = Instance.new("ScreenGui")
+    local ImageButton = Instance.new("ImageButton")
+    local UICorner = Instance.new("UICorner")
+    local UIStroke = Instance.new("UIStroke")
+    _G.CloseandOpenUi = true
 
-    ToggleGui.Name = "ToggleUI"
-    ToggleGui.Parent = game.CoreGui
-    ToggleGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+    ScreenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
 
-    ToggleButton.Name = "ToggleButton"
-    ToggleButton.Parent = ToggleGui
-    ToggleButton.BackgroundTransparency = 1
-    ToggleButton.Size = UDim2.new(0, 30, 0, 30)
-    ToggleButton.Position = UDim2.new(0.05, 0, 0.1, 0)
-    ToggleButton.Image = "rbxassetid://140684957911941"
-    ToggleButton.Draggable = true
-
-    ToggleCorner.CornerRadius = UDim.new(0, 15)
-    ToggleCorner.Parent = ToggleButton
-
-    ToggleButton.MouseButton1Click:Connect(function()
-        sitinklib:ToggleUI()
+    ImageButton.Parent = ScreenGui
+    ImageButton.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+    ImageButton.BorderColor3 = Color3.fromRGB(0, 0, 0)
+    ImageButton.BorderSizePixel = 0
+    ImageButton.Position = UDim2.new(0.100739375, 0, 0.121457487, 0)
+    ImageButton.Size = UDim2.new(0, 40, 0, 40)
+    ImageButton.Image = "rbxassetid://140684957911941"
+    ImageButton.Draggable = true
+    ImageButton.MouseButton1Click:Connect(function()
+        _G.CloseandOpenUi = not _G.CloseandOpenUi
+        Main.Visible = _G.CloseandOpenUi
     end)
+
+    UICorner.Parent = ImageButton
+    UICorner.CornerRadius = UDim.new(1, 0)
+
+    UIStroke.Color = Color3.fromRGB(255, 255, 255)
+    UIStroke.Parent = ImageButton
     
     --// Tab
     local LayersTab = Instance.new("Frame");
